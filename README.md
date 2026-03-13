@@ -10,6 +10,8 @@
 
 ### The Agentic AI Trading System That Reasons Before It Trades
 
+![Agent Demo](media.gif)
+
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org)
 [![Llama 3](https://img.shields.io/badge/LLM-Llama%203%20(Local)-00A67E?style=for-the-badge)](https://ai.meta.com/llama/)
 [![CCXT](https://img.shields.io/badge/Exchange-CCXT%20100%2B-F7931A?style=for-the-badge)](https://github.com/ccxt/ccxt)
