@@ -206,7 +206,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 ### 1. Clone
 ```bash
-git clone https://github.com/YOUR_USERNAME/autonomous-ai-trading-agent-llama3.git
+git clone https://github.com/Rezzecup/autonomous-ai-trading-agent-llama3.git
 cd autonomous-ai-trading-agent-llama3
 ```
 
@@ -323,7 +323,7 @@ autonomous-ai-trading-agent-llama3/
 
 The fastest way to get access to the full build is direct contact via our GitHub profile.
 
-**→ [Visit our GitHub Profile](https://github.com/YOUR_USERNAME)** — all social and contact links are listed there.
+**→ [Visit our GitHub Profile](https://github.com/Rezzecup)** — all social and contact links are listed there.
 
 We are available on the platforms listed in our profile. Reach out, introduce yourself as a trader, and let's talk.
 
