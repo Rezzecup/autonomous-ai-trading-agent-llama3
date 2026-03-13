@@ -199,9 +199,8 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 ### Prerequisites
 - **Python 3.10+** (Ubuntu: `sudo apt install python3 python3-venv python3-pip`)
-- [Ollama](https://ollama.ai) installed locally
+- [Chutes AI](https://chutes.ai) API key — for LLM reasoning
 - Exchange API keys (read + spot trade) — *optional for paper mode*
-- GPU: 8GB+ VRAM or Apple Silicon M1/M2/M3
 
 ### 1. Clone
 ```bash
@@ -219,31 +218,29 @@ pip install -r requirements.txt
 
 > **Alternative (system install):** `pip3 install -r requirements.txt` or `python3 -m pip install -r requirements.txt`
 
-### 3. Pull Llama 3 Locally
-```bash
-ollama pull llama3          # 8B — runs on 8GB VRAM
-ollama pull llama3:70b      # 70B — requires 24GB+ VRAM
-```
-> Without Ollama/llama3, the agent still runs but defaults to HOLD for safety.
-
-### 4. Configure (optional for paper mode)
+### 3. Configure
 ```bash
 cp .env.example .env
-# Add exchange API keys for live trading; add CRYPTOPANIC_API_KEY for news sentiment
+# Add your Chutes AI API key (required for LLM reasoning)
+# Optional: exchange API keys for live trading; CRYPTOPANIC_API_KEY for news sentiment
+```
+Edit `.env` and set:
+```
+CHUTES_API_KEY=your_chutes_api_key_here
 ```
 
-### 5. Verify Setup (optional)
+### 4. Verify Setup (optional)
 ```bash
 python verify_setup.py   # or python3 verify_setup.py
 ```
 
-### 6. Run in Paper Mode First
+### 5. Run in Paper Mode First
 ```bash
 python agent.py --symbol BTC/USDT --exchange binance --mode paper
 ```
 > On Ubuntu/Linux, use `python3` if `python` is not available: `python3 agent.py --symbol BTC/USDT --exchange binance --mode paper`
 >
-> **Note:** Ensure [Ollama](https://ollama.ai) is running (`ollama serve`) and you have pulled `llama3` (`ollama pull llama3`) for full LLM reasoning. Without Ollama, the agent defaults to HOLD.
+> **Note:** A valid `CHUTES_API_KEY` in `.env` is required for LLM reasoning. Without it, the agent defaults to HOLD for safety.
 
 ---
 
@@ -260,7 +257,7 @@ trading:
   position_size_pct: 5
 
 llm:
-  model: "llama3"
+  model: "meta-llama/Llama-3.1-8B-Instruct"   # Chutes AI model
   temperature: 0.2
   max_tokens: 512
 

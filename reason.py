@@ -1,14 +1,16 @@
 """
-Reason Module — Llama 3 Chain-of-Thought prompt engine.
+Reason Module — LLM Chain-of-Thought prompt engine.
+Uses Chutes AI API for trading decisions.
 Takes perception data, builds a structured prompt, and parses LLM output
 for DECISION (BUY/SELL/HOLD) and CONFIDENCE.
 """
 
 import logging
+import os
 import re
 from typing import Any, Optional
 
-import ollama
+import requests
 
 logger = logging.getLogger(__name__)
 
@@ -111,14 +113,63 @@ def _parse_decision(text: str) -> tuple[str, int, int]:
     return decision, confidence, next_check
 
 
+def _call_chutes_api(
+    prompt: str,
+    model: str,
+    temperature: float,
+    max_tokens: int,
+) -> str:
+    """Call Chutes AI API (OpenAI-compatible). Returns response content or raises."""
+    api_key = os.getenv("CHUTES_API_KEY", "").strip()
+    api_url = os.getenv("CHUTES_API_URL", "https://llm.chutes.ai/v1/chat/completions").strip()
+
+    if not api_key:
+        raise ValueError("CHUTES_API_KEY is not set. Add it to your .env file.")
+
+    headers = {
+        "Content-Type": "application/json",
+        "X-API-Key": api_key,
+    }
+    payload = {
+        "model": model,
+        "messages": [
+            {"role": "system", "content": SYSTEM_PROMPT},
+            {"role": "user", "content": prompt},
+        ],
+        "max_tokens": max_tokens,
+        "temperature": temperature,
+    }
+
+    for attempt in range(3):
+        resp = requests.post(api_url, headers=headers, json=payload, timeout=90)
+        if resp.status_code == 429:
+            wait = (attempt + 1) * 5
+            if attempt < 2:
+                logger.info("Rate limited (429), retrying in %ds...", wait)
+                import time
+                time.sleep(wait)
+                continue
+            raise requests.HTTPError("Rate limit (429). Try again in a few minutes.", response=resp)
+        resp.raise_for_status()
+        data = resp.json()
+        choices = data.get("choices", [])
+        if not choices:
+            raise ValueError("Chutes API returned empty choices")
+        msg = choices[0].get("message", {})
+        content = msg.get("content") or ""
+        return content
+
+    raise ValueError("Request failed after retries")
+
+
 def reason(
     perception: dict[str, Any],
-    model: str = "llama3",
+    model: str = "meta-llama/Llama-3.1-8B-Instruct",
     temperature: float = 0.2,
     max_tokens: int = 512,
 ) -> dict[str, Any]:
     """
-    Run Llama 3 CoT reasoning. Returns dict with:
+    Run LLM CoT reasoning via Chutes AI API. Returns dict with:
     - raw_reasoning: full LLM text
     - decision: BUY | SELL | HOLD
     - confidence: 0-100
@@ -127,24 +178,33 @@ def reason(
     prompt = build_prompt(perception)
 
     try:
-        response = ollama.chat(
-            model=model,
-            messages=[
-                {"role": "system", "content": SYSTEM_PROMPT},
-                {"role": "user", "content": prompt},
-            ],
-            options={
-                "temperature": temperature,
-                "num_predict": max_tokens,
-            },
-        )
-        # Handle both dict and object responses from ollama
-        msg = response.get("message", {}) if isinstance(response, dict) else getattr(response, "message", None)
-        content = ""
-        if msg is not None:
-            content = msg.get("content", "") if isinstance(msg, dict) else getattr(msg, "content", "")
-    except Exception as e:
-        logger.error("Ollama error: %s", e)
+        content = _call_chutes_api(prompt, model, temperature, max_tokens)
+    except requests.RequestException as e:
+        err_msg = str(e)
+        resp = getattr(e, "response", None)
+        if resp is not None:
+            try:
+                err_body = resp.json()
+                err_msg = err_body.get("detail", err_body.get("error", err_msg))
+            except Exception:
+                raw = getattr(resp, "text", None) or ""
+                if resp.status_code == 429:
+                    err_msg = "Rate limit (429). Try again later."
+                elif "429" in raw or "Too Many" in raw:
+                    err_msg = "Rate limit (429). Try again later."
+                elif raw.startswith("<"):
+                    err_msg = f"HTTP {resp.status_code}"
+                else:
+                    err_msg = raw[:200] if raw else err_msg
+        logger.error("Chutes API error: %s", err_msg)
+        return {
+            "raw_reasoning": f"Error: {err_msg}",
+            "decision": "HOLD",
+            "confidence": 0,
+            "next_check_minutes": 15,
+        }
+    except ValueError as e:
+        logger.error("%s", e)
         return {
             "raw_reasoning": f"Error: {e}",
             "decision": "HOLD",

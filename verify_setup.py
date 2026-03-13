@@ -43,12 +43,11 @@ def main():
     # Dependencies
     deps = [
         ("ccxt", "Exchange connectivity"),
-        ("ollama", "Ollama LLM client"),
+        ("requests", "HTTP (Chutes API)"),
         ("pandas", "Data processing"),
         ("ta", "Technical indicators"),
         ("yaml", "Config (PyYAML)"),
         ("dotenv", "Environment (python-dotenv)"),
-        ("requests", "HTTP requests"),
     ]
     for mod, desc in deps:
         try:

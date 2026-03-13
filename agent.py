@@ -110,10 +110,10 @@ def run_cycle(config: dict) -> int:
         logger.warning("  No technical data — check exchange/symbol")
 
     # 2. REASON
-    logger.info("REASON: Querying Llama 3...")
+    logger.info("REASON: Querying Chutes AI...")
     reasoning = reason(
         perception,
-        model=llm.get("model", "llama3"),
+        model=llm.get("model", "meta-llama/Llama-3.1-8B-Instruct"),
         temperature=llm.get("temperature", 0.2),
         max_tokens=llm.get("max_tokens", 512),
     )

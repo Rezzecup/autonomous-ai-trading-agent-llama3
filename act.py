@@ -38,10 +38,11 @@ def _get_exchange(
 
 
 def _paper_init_balance(symbol: str, price: float, position_size_pct: float):
-    """Initialize paper balance with mock USDT and asset."""
-    if symbol not in _paper_balance:
-        _paper_balance[symbol] = 10000.0  # 10k USDT
+    """Initialize paper balance with mock quote (USDT) and base asset."""
     base = symbol.split("/")[0]
+    quote = symbol.split("/")[1] if "/" in symbol else "USDT"
+    if quote not in _paper_balance:
+        _paper_balance[quote] = 10000.0
     if base not in _paper_balance:
         _paper_balance[base] = 0.0
 
@@ -69,7 +70,7 @@ def _paper_execute_buy(
     spend = min(spend, usdt * 0.95)
     amount = spend / price if price > 0 else 0
 
-    _paper_balance[quote] = _paper_balance.get(quote, 0) - spend
+    _paper_balance[quote] = usdt - spend
     _paper_balance[base] = _paper_balance.get(base, 0) + amount
 
     order = {
@@ -101,7 +102,7 @@ def _paper_execute_sell(
     amount = min(amount, base_amt)
 
     proceeds = amount * price
-    _paper_balance[base] = _paper_balance.get(base, 0) - amount
+    _paper_balance[base] = base_amt - amount
     _paper_balance[quote] = _paper_balance.get(quote, 0) + proceeds
 
     order = {

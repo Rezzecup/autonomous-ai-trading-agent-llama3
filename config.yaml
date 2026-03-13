@@ -8,7 +8,7 @@ trading:
   position_size_pct: 5
 
 llm:
-  model: "llama3"
+  model: "meta-llama/Llama-3.1-8B-Instruct"   # Chutes AI model
   temperature: 0.2
   max_tokens: 512
 
@@ -21,6 +21,6 @@ indicators:
   macd_signal: 9
 
 news:
-  provider: "cryptopanic"    # cryptopanic | finnhub
+  provider: "finnhub"       # cryptopanic | finnhub
   lookback_hours: 2
   max_headlines: 5
