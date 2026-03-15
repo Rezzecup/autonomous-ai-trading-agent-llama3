@@ -1,44 +1,35 @@
-<!-- Keywords: autonomous ai trading agent python 2026, llama3 trading bot open source,
-     local llm crypto trading, agentic ai trading system, chain of thought trading,
-     ccxt python trading bot, ollama trading agent github, ai crypto trader beta,
-     algorithmic trading llm, best ai trading bot 2026, llama3 python trader,
-     crypto trading bot collaboration, ai trading agent beta access -->
-
 <div align="center">
 
-# 🤖 Autonomous AI Trading Agent — Llama 3
+# Autonomous AI Trading Agent for Crypto and Stocks
 
-### The Agentic AI Trading System That Reasons Before It Trades
+### Agentic trading system built with Python, Llama 3, CCXT, and Ollama
 
 ![Agent Demo](media.gif)
 
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org)
-[![Llama 3](https://img.shields.io/badge/LLM-Llama%203%20(Local)-00A67E?style=for-the-badge)](https://ai.meta.com/llama/)
-[![CCXT](https://img.shields.io/badge/Exchange-CCXT%20100%2B-F7931A?style=for-the-badge)](https://github.com/ccxt/ccxt)
+[![Llama 3](https://img.shields.io/badge/LLM-Llama%203-00A67E?style=for-the-badge)](https://ai.meta.com/llama/)
+[![CCXT](https://img.shields.io/badge/Exchange-CCXT-F7931A?style=for-the-badge)](https://github.com/ccxt/ccxt)
 [![Ollama](https://img.shields.io/badge/Runtime-Ollama-black?style=for-the-badge)](https://ollama.ai)
-[![Status](https://img.shields.io/badge/Status-Beta%20%7C%20Actively%20Developing-FF6B35?style=for-the-badge)]()
-[![License: MIT](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](https://opensource.org/licenses/MIT)
-
-[⚡ Get Full Version](#-want-the-full-version) · [📦 Installation](#️-installation) · [🧠 How It Works](#-how-the-agent-reasons) · [📊 Beta Status](#-current-beta-status) · [🗺️ Roadmap](#️-roadmap)
-
----
-
-> **⚡ This is the public beta. The full version is in private development — actively shipping daily.**
-> Serious traders: scroll to the bottom to find out how to get access.
-
-
 
 </div>
 
----
+## What This Project Does
 
-## 🔥 What This Project Is
+This repository is an autonomous AI trading agent built in Python for crypto and stock market workflows. It uses an agentic **Perceive → Reason → Act** loop to analyze technical indicators, news sentiment, and market context before generating a trading decision.
 
-This is not a tutorial. This is not a demo. This is not abandoned.
+The system connects to exchanges through **CCXT**, supports **paper trading** and **live trading**, and logs each decision for review. It is designed for traders and developers who want a transparent trading bot with LLM-based reasoning instead of a simple rule-only strategy.
 
-This is a **live, actively developed autonomous AI trading system** — and what you see here is the public beta layer of a much deeper build.
+The current public version includes:
+- Llama 3 trading reasoning
+- technical indicator analysis
+- news sentiment injection
+- multi-exchange trading through CCXT
+- paper mode for safe testing
+- local Ollama fallback support
 
-We are running two tracks simultaneously:
+This project is useful for traders building AI-assisted execution systems, researchers testing agentic trading workflows, and developers exploring local LLM trading infrastructure.
+
+> Public beta is available in this repository. A larger private build is under active development.
 
 **🟢 Public Beta (this repo)** — Core agent logic, open-source, free forever.
 **🔒 Private Build (invite only)** — The full system: multi-timeframe reasoning, portfolio management, backtesting, custom fine-tuned LLM, and a proprietary strategy layer built hand-in-hand with active traders.
@@ -328,36 +319,3 @@ The fastest way to get access to the full build is direct contact via our GitHub
 We are available on the platforms listed in our profile. Reach out, introduce yourself as a trader, and let's talk.
 
 ---
-
-## ⭐ Support the Project
-
-If this agent gives you an edge:
-- ⭐ **Star this repo** — it helps serious traders find us
-- 🍴 **Fork it** — build your own strategy layer on top
-- 📣 **Share it** — with every trader who deserves better tools
-
----
-
-## ⚠️ Risk Disclaimer
-
-This is a beta release under active development. Validate all strategies thoroughly before live deployment.
-Cryptocurrency trading involves **substantial risk of financial loss**.
-**Never risk capital you cannot afford to lose.**
-The authors accept no liability for financial losses incurred.
-
----
-
-<div align="center">
-
-**🧠 Llama 3 · 🐍 Python · ⚡ CCXT · 📰 Real-Time Sentiment · 🔒 Local-First**
-
-*Public beta. Private build. Real results.*
-
-<!-- autonomous ai trading agent python 2026 | llama3 trading bot open source |
-     local llm crypto trading | agentic ai trading system github | chain of thought trading |
-     best ai trading bot 2026 | ollama trading python | ccxt llm agent |
-     full version ai trading agent | private ai trading bot access | 
-     crypto trading bot full version | algorithmic trading llm contact |
-     ai trading agent developer contact | get full trading bot access 2026 -->
-
-</div>
