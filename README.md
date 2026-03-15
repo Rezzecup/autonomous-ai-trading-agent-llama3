@@ -6,11 +6,6 @@
 
 ![Agent Demo](media.gif)
 
-[![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org)
-[![Llama 3](https://img.shields.io/badge/LLM-Llama%203-00A67E?style=for-the-badge)](https://ai.meta.com/llama/)
-[![CCXT](https://img.shields.io/badge/Exchange-CCXT-F7931A?style=for-the-badge)](https://github.com/ccxt/ccxt)
-[![Ollama](https://img.shields.io/badge/Runtime-Ollama-black?style=for-the-badge)](https://ollama.ai)
-
 </div>
 
 ## What This Project Does
